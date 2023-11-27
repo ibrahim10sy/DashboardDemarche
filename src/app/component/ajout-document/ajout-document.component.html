@@ -1,0 +1,58 @@
+<div class="formulare">
+    <form [formGroup]="docForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" >
+        <div class="form-container">
+          <div class="input-container">
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="nom" placeholder="Nom du document"  required >
+            </div>
+  
+            <div class="input-desc">
+              <textarea id="description" formControlName="description" placeholder="Description" required></textarea>
+            </div>
+            
+            <div class="input-desc">
+                <select name="guideSelected" id="guideSelected" formControlName="guide">
+                  <option value="" placeholder="Selectionner un guide">Sélectionnez un Guide</option>
+                  <option *ngFor="let guide of guideSelected" [ngValue]="guide">{{ guide.libelle }}</option>
+               </select>
+              </div>
+
+            <div class="input-desc">
+                <select name="bureauSelected" id="bureauSelected" formControlName="bureau">
+                  <option value="" placeholder="Selectionner un bureau">Sélectionnez un Bureau</option>
+                  <option *ngFor="let bureau of bureauSelected" [ngValue]="bureau">{{ bureau.nom }}</option>
+               </select>
+              </div>
+
+              <div class="input-filed">
+                <input type="file" class="form-control" formControlName="audio" multiple="multiple" accept="audio/*" (change)="AudioChange($event)" required>
+              </div>
+
+          </div>
+          <div class="image-container">
+            <div class="img">
+              <div *ngIf="imageSrc; else showEmptyContainer">
+                  <img [src]="imageSrc" style="height: 180px; width: 180px" />
+              </div>
+              <ng-template #showEmptyContainer>
+                  <div style="height: 180px; width: 180px;"></div>
+              </ng-template>
+            </div>
+
+            <div class="input-filed">
+              <input type="file" class="form-control" formControlName="image" multiple="multiple" accept="image/*" (change)="ImageChange($event)" (change)="onFileChange($event)" required>
+            </div>
+
+              <div class="input-filed">
+                <input type="file" class="form-control" formControlName="fichier" multiple="multiple" (change)="onFileSelected($event)" accept="*/*" required>
+              </div>
+
+          </div>
+        </div>
+        <div mat-dialog-actions class="actions">
+          <button mat-button mat-dialog-close><i class='bx bx-x'></i> Annuler</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!docForm.valid"> <i class='bx bx-check'></i>{{ data ? "Modifier" : "Ajouter" }}</button>
+        </div>
+      </form>
+  </div>
+  

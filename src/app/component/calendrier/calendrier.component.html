@@ -1,0 +1,24 @@
+<!-- calendrier.component.html -->
+
+<div class="container">
+  <header>
+    <h1>Calendrier</h1>
+  </header>
+  
+  <!-- Formulaire pour créer un nouvel événement -->
+  <form (submit)="createEvent()">
+    <label for="eventName">Nom de l'événement:</label>
+    <input type="text" id="eventName" name="eventName" [(ngModel)]="eventName" required>
+
+    <label for="eventDate">Date de l'événement:</label>
+    <input type="date" id="eventDate" name="eventDate" [(ngModel)]="date" required>
+
+    <button type="submit">Ajouter l'événement</button>
+</form>
+
+
+  <full-calendar
+    [options]="calendarOptions"
+    
+  ></full-calendar>
+</div>

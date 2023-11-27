@@ -1,0 +1,26 @@
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+button{
+  padding: 10px 12px;
+  background: #202882;
+  color: #fff;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+button:hover{
+  background: rgb(98, 105, 179);
+  transition: width 0..2s linear;
+}
+img{
+  widht: 50px;
+  height:50px;
+  border-raduis : 100%;
+}

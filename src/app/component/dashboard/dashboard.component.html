@@ -1,0 +1,63 @@
+
+<header>
+    <h1>Tableau de bord</h1>
+    <div class="admin">
+        <p>{{adminRecup?.nom}} {{adminRecup?.prenom}}</p>
+        <img [src]="'http://localhost/'+adminRecup?.image" alt="" (click)="openProfile(adminRecup!)">
+       
+    </div>
+</header>
+
+<section>
+    <div class="container-header">
+        <div class="card" >
+            <h3>Guides</h3>
+            <div>
+               <span><i class='bx bxs-folder-open'></i></span>
+                <span>Nombre de bureaux</span>
+            </div>
+            <span style="margin-left: 8rem; font-size: 25px;">{{guides.length}}</span>
+        </div>
+        <div class="card" >
+            <h3>Bureaux</h3>
+            <div>
+               <span><i class='bx bxs-home'></i></span>
+                <span>Nombre de bureaux</span>
+            </div>
+            <span style="margin-left: 8rem; font-size: 25px;">{{bureau.length}}</span>
+        </div>
+        <div class="card" >
+            <h3>Actualité</h3>
+            <div>
+               <span><i class='bx bxs-home'></i></span>
+                <span>Nombre d'acualté</span>
+            </div>
+            <span style="margin-left: 8rem; font-size: 25px;">{{actu.length}}</span>
+        </div>
+        <div class="card" > 
+            <h3>Utilisateur</h3>
+            <div>
+                <span><i class='bx bxs-user'></i></span>
+                <span>Nombre d'utilisateur</span>
+            </div>
+            <span style="margin-left: 8rem; font-size: 25px;">{{user.length}}</span>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+    <h1>Les guides administratives</h1>
+    <div class="container-guide">
+            <div class="cards" *ngFor="let guide of guides">
+                <div class="img">
+                    <img [src]=" 'http://localhost/'+guide.image" alt="">
+                </div>
+                <h3>{{guide.libelle}}</h3>
+                <div class="icon">
+                    <i class='bx bxs-volume-full' (click)="playAudio('http://localhost/'+guide.audio)"></i>
+                    <i class='bx bxs-show' (click)="openGuide(guide)"></i>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</section>

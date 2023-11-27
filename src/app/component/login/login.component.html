@@ -1,0 +1,29 @@
+
+
+
+    <div class="card">
+        <div class="card-head">
+            <div class="icon">
+                <i class='bx bxl-google'></i>
+                <i class='bx bxl-facebook-circle'></i>
+                <i class='bx bxl-twitter'></i>
+            </div>
+            <h3>Page Administrateur</h3>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="input-field"> 
+                <i class='bx bxs-envelope'></i>
+                <input type="text" placeholder="Email" formControlName="email" required>
+            </div>
+
+            <div class="input-field">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" placeholder="Mot de passe" formControlName="motDePasse" required>
+            </div>
+
+            <div class="btn">
+                <button  type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+            </div>
+        </form>
+    </div>

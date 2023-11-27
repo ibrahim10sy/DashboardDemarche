@@ -1,0 +1,38 @@
+
+  <div class="formulare">
+    <form [formGroup]="guideFrom" (ngSubmit)="onSubmit()" enctype="multipart/form-data" >
+        <div class="form-container">
+          <div class="input-container">
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="libelle" placeholder="Libelle"  required >
+            </div>
+  
+            <div class="input-desc">
+              <textarea id="description" formControlName="description" placeholder="Description" required></textarea>
+            </div>
+            
+            <div class="input-filed">
+              <input type="file" class="form-control" formControlName="image" multiple="multiple" accept="image/*" (change)="ImageChange($event)" (change)="onFileChange($event)" required>
+            </div>
+          </div>
+          <div class="image-container">
+            <div class="input-filed">
+              <input type="file" class="form-control" formControlName="audio" multiple="multiple" accept="audio/*" (change)="AudioChange($event)" required>
+            </div>
+            <div class="img">
+              <div *ngIf="imageSrc; else showEmptyContainer">
+                  <img [src]="imageSrc" style="height: 180px; width: 180px" />
+              </div>
+              <ng-template #showEmptyContainer>
+                  <div style="height: 180px; width: 180px;"></div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div mat-dialog-actions class="actions">
+          <button mat-button mat-dialog-close><i class='bx bx-x'></i> Annuler</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!guideFrom.valid"> <i class='bx bx-check'></i>{{ data ? "Modifier" : "Ajouter" }}</button>
+        </div>
+      </form>
+  </div>
+  

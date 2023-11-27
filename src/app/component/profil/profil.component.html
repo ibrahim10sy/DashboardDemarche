@@ -1,0 +1,42 @@
+<h1>Profil personnelle</h1>
+
+<div class="container-dflex">
+    <div class="formulare">
+        <form (ngSubmit)="modifierProfil()">
+            <div class="form-container">
+    
+                <div class="input-field">
+                  <input type="text"  [(ngModel)]="adminRecup.nom" placeholder="nom"  name="nom" >
+                </div>
+    
+                <div class="input-field">
+                  <input type="text" [(ngModel)]="adminRecup.prenom" placeholder="prenom"  name="prenom" >
+                </div>
+    
+                <div class="input-field">
+                    <input type="text" [(ngModel)]="adminRecup.email" name="email" placeholder="email" >
+                </div>
+    
+                <div class="input-field">
+                  <input type="text"  [(ngModel)]="adminRecup.motDePasse" placeholder="mot de passe"  name="motDePasse" >
+                </div>
+    
+             
+            </div> <br>
+            <div mat-dialog-actions class="actions">
+              <button mat-raised-button color="primary" type="submit" > <i class='bx bx-check'></i>Modifier</button>
+            </div>
+          </form>
+      </div>
+
+      <div class="profil">
+        <div class="img">
+          <img [src]="'http://localhost/'+adminRecup.image" alt="">
+        </div>
+        <br>
+        <div class="text">
+        <p>{{adminRecup.nom}} {{adminRecup.prenom}}</p>
+        <p>{{adminRecup.email}}</p>
+        </div>
+      </div>
+</div>

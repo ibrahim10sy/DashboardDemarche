@@ -1,0 +1,33 @@
+<header>
+    <h1>Détail du guide </h1>
+</header>
+
+<section>
+
+    <div class="container-fluid">
+
+        <div class="container">
+            <div class="img">
+                <img [src]="'http://localhost/'+guideRecup.image" alt="mon image">
+            </div>
+            <div class="desc">
+                <p>{{guideRecup.libelle}}</p>
+                <p>{{guideRecup.description}}</p>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="contenu">
+        <div class="row" *ngFor="let doc of document">
+            <div class="nomDoc" >
+                <p>{{doc.nom}}</p>
+            </div>
+            <div class="icon">
+                <i class='bx bxs-info-circle'  (click)="openDocument(doc)"></i>
+            </div>
+        </div>
+        
+    </div>
+
+</section>

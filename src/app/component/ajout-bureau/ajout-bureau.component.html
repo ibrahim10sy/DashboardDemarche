@@ -1,0 +1,33 @@
+
+<div class="formulare">
+    <form  [formGroup]="bureauForm" (ngSubmit)="onSubmit()" >
+        <div class="form-container">
+
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="nom" placeholder="nom"  required >
+            </div>
+
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="ville" placeholder="ville"  required >
+            </div>
+
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="adresse" placeholder="adresse"  required >
+            </div>
+
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="latitude" placeholder="latitude"  required >
+            </div>
+
+            <div class="input-field">
+              <input type="text" id="nom" formControlName="longitude" placeholder="longitude"  required >
+            </div>
+         
+        </div>
+        <div mat-dialog-actions class="actions">
+          <button mat-button mat-dialog-close class="btn-annuler"><i class='bx bx-x'></i> Annuler</button>
+          <button mat-raised-button color="primary" type="submit" > <i class='bx bx-check'></i>Ajouter</button>
+        </div>
+      </form>
+  </div>
+  
