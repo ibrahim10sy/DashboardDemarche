@@ -24,8 +24,8 @@ export class SidebarComponent implements OnInit {
   isLoginPage: boolean = false;
   // isBlankPage : boolean = false;
 
-  constructor(private router: Router){
-    this.router.events.subscribe((event) => {
+  constructor(private routers: Router){
+    this.routers.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isLoginPage =  event.url === 'login';
       }
