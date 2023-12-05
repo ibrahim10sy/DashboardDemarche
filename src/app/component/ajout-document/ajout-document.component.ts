@@ -29,6 +29,9 @@ export class AjoutDocumentComponent implements OnInit {
 
   constructor(private docSerivce : DocumentService, private formBuilder: FormBuilder,private guideSer: GuideService, private bureauSer : BureauService,
     private authService: AuthService, private snack : CoreService,  @Inject(MAT_DIALOG_DATA) public data: any){
+      
+      this.adminRecup = this.authService.getAdminConnecte();
+      console.log("Admin recup dans doc onInit ", this.adminRecup);
 
       this.docForm = this.formBuilder.group({
         image: ['', Validators.required],

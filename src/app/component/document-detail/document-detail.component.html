@@ -9,14 +9,14 @@
 
         <div class="container">
             <div class="img">
-                <img [src]="document.image" alt="mon image">
+                <img [src]="'http://localhost/'+document.image" alt="mon image">
             </div>
             <div class="desc">
                 <p>{{document.nom}}</p>
                 <p>{{document.description}}</p>
                 <p>Service à contacter :{{document.bureau.nom}} <br> Adresse :{{document.bureau.adresse}}</p>
                 <p>Guide :{{document.guide.libelle}}</p>
-                <a [href]="document.fichier">Télécharger le fichier</a>
+                <a [href]="'http://localhost/'+document.fichier">Télécharger le fichier</a>
             </div>
         </div>
     

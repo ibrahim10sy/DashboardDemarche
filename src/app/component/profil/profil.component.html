@@ -35,8 +35,12 @@
         </div>
         <br>
         <div class="text">
-        <p>{{adminRecup.nom}} {{adminRecup.prenom}}</p>
+        <p>{{adminRecup.nom.toUpperCase()}} {{adminRecup.prenom.toUpperCase()}}</p>
         <p>{{adminRecup.email}}</p>
+        </div>
+        <div class="decon">
+          <button mat-raised-button color="primary" type="submit" (click)="logout()"> <i class='bx bx-check'></i>Déconnexion</button>
+
         </div>
       </div>
 </div>

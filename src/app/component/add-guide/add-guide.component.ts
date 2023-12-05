@@ -23,9 +23,12 @@ export class AddGuideComponent {
   dataTest! : any;
 
   constructor(private formBuilder: FormBuilder, private guideService: GuideService, private authService: AuthService, private snack : CoreService,
-     @Inject(MAT_DIALOG_DATA) public data: any) {
-
     
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.adminRecup = this.authService.getAdminConnecte();
+      console.log("Admin recup dans guide add onInit ", this.adminRecup);
+      console.log('data',this.data);
+
     this.guideFrom = this.formBuilder.group({
       image: ['', Validators.required],
       audio: ['', Validators.required],

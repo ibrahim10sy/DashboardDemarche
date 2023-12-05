@@ -2,7 +2,7 @@
 export const navbarData = [
     {
         routerLink : 'dashboard',
-        icon : 'fa-solid fa-grid-horizontal',
+        icon : 'fa-sharp fa-regular fa-grid-horizontal',
         label : 'Tableau de bord',
     },
     {
@@ -20,11 +20,11 @@ export const navbarData = [
         icon : 'bx bxs-folder',
         label : 'Documents',
     },
-    {
-        routerLink : 'forum',
-        icon : 'fa-brands fa-rocketchat',
-        label : 'Forum',
-    },
+    // {
+    //     routerLink : 'forum',
+    //     icon : 'fa-brands fa-rocketchat',
+    //     label : 'Forum',
+    // },
     {
         routerLink : 'calendrier',
         icon : 'fa-solid fa-calendar-days',
@@ -35,11 +35,11 @@ export const navbarData = [
         icon : 'fa-sharp fa-solid fa-newspaper',
         label : 'Actualités',
     },
-    {
-        routerLink : 'map',
-        icon : 'fa-solid fa-map',
-        label : 'Map',
-    },
+    // {
+    //     routerLink : 'map',
+    //     icon : 'fa-solid fa-map',
+    //     label : 'Map',
+    // },
     {
         routerLink : 'utilisateur',
         icon : 'fa-solid fa-user',

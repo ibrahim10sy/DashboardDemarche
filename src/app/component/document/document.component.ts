@@ -24,23 +24,26 @@ export class DocumentComponent {
     @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private docSerive : DocumentService ,private dialogRef: MatDialog,private snack : CoreService) {
+  constructor(private serviceDoc : DocumentService,private dialogRef: MatDialog,private snack : CoreService) {
     
    
     //this.dataSource = new MatTableDataSource(this.docs);
   }
 
   ngOnInit(): void {
-    this.docSerive.getDocument().subscribe((doc:any) => {
+    this.loadDocuments();
+  }
+
+  loadDocuments(): void {
+    this.serviceDoc.getDocument().subscribe((doc: any) => {
       this.docs = doc;
       this.dataSource = new MatTableDataSource(this.docs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
-
   onDelete(id: number): void {
-    this.docSerive.deleteDocument(id).subscribe({
+    this.serviceDoc.deleteDocument(id).subscribe({
       next: res => {
         // Si la suppression est effectuée avec succès
         if (res) {
@@ -143,7 +146,11 @@ export class DocumentComponent {
       width: '520px',
       height: '500px',
     });
-    dialog.afterClosed();
+    dialog.afterClosed().subscribe(result => {
+      // Rafraîchir les données après la fermeture de la boîte de dialogue
+      this.loadDocuments();
+    });
+    
   }
 
   editDocument(data:any){
@@ -151,11 +158,10 @@ export class DocumentComponent {
       data
     });
     console.log("Data envoyé", data);
-    dialog.afterClosed();
-    this.docs = this.docs.filter(doc => doc.idDocument !== data.idDocument);
-
-    // Mettre à jour la source de données MatTable
-    this.dataSource.data = this.docs;
+    dialog.afterClosed().subscribe(result => {
+      // Rafraîchir les données après la fermeture de la boîte de dialogue
+      this.loadDocuments();
+    });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

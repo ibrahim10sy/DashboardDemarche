@@ -47,8 +47,8 @@ export class AjoutActuComponent {
 
   onSubmit(){
     const errorMessage = 'Une erreur s\'est produit lors de l\'ajout';
-    const successMessage = 'Guide créé avec succès !';
-    const successMessageM = 'Guide modifier avec succès !';
+    const successMessage = 'Actualité créé avec succès !';
+    const successMessageM = 'Actualité modifier avec succès !';
     const Message = 'Veillez remplir les champs';
 
     if(this.actuForm.valid && this.image){

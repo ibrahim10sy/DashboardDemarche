@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -14,22 +14,23 @@ import { CoreService } from 'src/app/service/core.service';
   templateUrl: './bureau.component.html',
   styleUrls: ['./bureau.component.css']
 })
-export class BureauComponent {
+export class BureauComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'nom', 'ville', 'adresse','longitude','latitude','action'];  
+  displayedColumns: string[] = ['id', 'nom', 'ville', 'adresse', 'longitude', 'latitude', 'action'];
   dataSource = new MatTableDataSource<Bureau>();
   bureaux: Bureau[] = [];
- 
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
-    @ViewChild(MatSort) sort!: MatSort;
-  constructor(private bureauSerivce: BureauService,private dialogRef: MatDialog,private snack : CoreService) {
-    
-   
-   // this.dataSource = new MatTableDataSource(this.bureaux);
-  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private bureauService: BureauService, private dialogRef: MatDialog, private snack: CoreService) {}
 
   ngOnInit(): void {
-    this.bureauSerivce.getBureau().subscribe(bureau => {
+    this.loadBureaux();
+  }
+
+  loadBureaux(): void {
+    this.bureauService.getBureau().subscribe(bureau => {
       this.bureaux = bureau;
       this.dataSource = new MatTableDataSource(this.bureaux);
       this.dataSource.paginator = this.paginator;
@@ -46,31 +47,30 @@ export class BureauComponent {
     }
   }
 
-  openDialog(){
-    const dialog = this.dialogRef.open(AjoutBureauComponent,{
+  openDialog(): void {
+    const dialogRef = this.dialogRef.open(AjoutBureauComponent, {
       width: '340px',
       height: '400px',
     });
-    dialog.afterClosed();
-    this.bureaux = this.bureaux.filter(bur => bur.idBureau);
-
-    // Mettre à jour la source de données MatTable
-    this.dataSource.data = this.bureaux;
+    dialogRef.afterClosed().subscribe(result => {
+      // Rafraîchir les données après la fermeture de la boîte de dialogue
+      this.loadBureaux();
+    });
   }
 
-  editBureau(data:any){
-    const dialog = this.dialogRef.open(AjoutBureauComponent,{
+  editBureau(data: any) {
+    const dialogRef = this.dialogRef.open(AjoutBureauComponent, {
       data
     });
     console.log("Data envoyé", data);
-    dialog.afterClosed();
-    this.bureaux = this.bureaux.filter(bur => bur.idBureau = data.id);
-
-    // Mettre à jour la source de données MatTable
-    this.dataSource.data = this.bureaux;
+    dialogRef.afterClosed().subscribe(result => {
+      // Rafraîchir les données après la fermeture de la boîte de dialogue
+      this.loadBureaux();
+    });
   }
+
   onDelete(id: number): void {
-    this.bureauSerivce.deleteBureau(id).subscribe({
+    this.bureauService.deleteBureau(id).subscribe({
       next: res => {
         // Si la suppression est effectuée avec succès
         if (res) {
@@ -118,11 +118,11 @@ export class BureauComponent {
               });
             }
           });
-           // Mettre à jour la liste locale après la suppression
-        this.bureaux = this.bureaux.filter(bure => bure.idBureau !== id);
+          // Mettre à jour la liste locale après la suppression
+          this.bureaux = this.bureaux.filter(bure => bure.idBureau !== id);
 
-        // Mettre à jour la source de données MatTable
-        this.dataSource.data = this.bureaux;
+          // Mettre à jour la source de données MatTable
+          this.dataSource.data = this.bureaux;
         } else {
           this.snack.openSnackBar('Une erreur est survenue lors de la suppression du bureau.', err);
         }

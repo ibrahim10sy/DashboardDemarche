@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Admin } from 'src/app/model/Admin';
 import { AdminService } from 'src/app/service/admin.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { CoreService } from 'src/app/service/core.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ProfilComponent {
   modificationForm: FormGroup;
   
 
-  constructor(private formBuilder: FormBuilder, private router: Router,private snack : CoreService,private route: ActivatedRoute, private adminService : AdminService) {
+  constructor(private formBuilder: FormBuilder, private router: Router,private authService: AuthService,private snack : CoreService,private route: ActivatedRoute, private adminService : AdminService) {
     this.modificationForm
     = this.formBuilder.group({
       nom: ['', Validators.required],
@@ -37,6 +38,11 @@ export class ProfilComponent {
    
     }
 
+    logout() {
+      this.authService.logout();
+      // Redirect to the login page or home page after logout
+      this.router.navigate(['/login']);
+    }
     modifierProfil(){
       if(this.admin){
         console.log("admin a modifier",this.admin);

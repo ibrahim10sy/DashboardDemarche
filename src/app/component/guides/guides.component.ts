@@ -51,6 +51,10 @@ export class GuidesComponent implements OnInit {
       height: '400px',
     });
     dialogRef.afterClosed();
+    this.guides = this.guides.filter(guide => guide.idGuide);
+
+    // Mettre à jour la source de données MatTable
+    this.dataSource.data = this.guides;
   }
 
   editGuit(data:any){
@@ -58,13 +62,20 @@ export class GuidesComponent implements OnInit {
       data
     });
     console.log("data a envoyé",data);
-    dialogRef.afterClosed();
-    this.guides = this.guides.filter(guide => guide.idGuide !== data.idGuide);
-
-    // Mettre à jour la source de données MatTable
-    this.dataSource.data = this.guides;
+    dialogRef.afterClosed().subscribe(result => {
+      // Rafraîchir les données après la fermeture de la boîte de dialogue
+      this.loadGuides();
+    });
   }
 
+  loadGuides(): void {
+    this.guideService.getGuide().subscribe(guide => {
+      this.guides = guide;
+      this.dataSource = new MatTableDataSource(this.guides);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
   onDelete(id: number): void {
     this.guideService.deleteGuide(id).subscribe({
       next: res => {

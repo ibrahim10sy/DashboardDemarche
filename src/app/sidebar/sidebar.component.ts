@@ -27,9 +27,10 @@ export class SidebarComponent implements OnInit {
   constructor(private routers: Router){
     this.routers.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isLoginPage =  event.url === 'login';
+        this.isLoginPage = event.url === '/login';
       }
     });
+    
   }
 
   ngOnInit(): void {

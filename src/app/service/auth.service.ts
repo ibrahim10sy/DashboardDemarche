@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Admin } from '../model/Admin';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,14 @@ export class AuthService {
     localStorage.setItem('admin1', JSON.stringify(this.admin1));
     }
 
-  constructor() {
+  constructor(private router: Router) {
     
   }
-
+  logout() {
+    // Clear authentication-related data
+    // Redirect to the login page or home page after logout
+    this.router.navigate(['/login']);
+  }
   setAdminConnecte(admin: Admin) {
     this.admin1 = admin;
     this.saveAdmin();

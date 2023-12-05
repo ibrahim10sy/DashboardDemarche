@@ -68,6 +68,7 @@ export class ActualiteComponent implements OnInit {
             text: "Actualité a été supprimé avec succès",
             icon: "success"
           });
+          this.dataSource = new MatTableDataSource(this.actualite);
         } else {
           this.snack.openSnackBar('Une erreur est survenue lors de la suppression.', err);
         }
@@ -80,7 +81,10 @@ export class ActualiteComponent implements OnInit {
       width: '520px',
       height: '400px',
     });
-    dialog.afterClosed();
+    dialog.afterClosed().subscribe(result => {
+      // Actualisez les données ici si nécessaire
+      this.refreshData();
+    });
   }
 
   editActualite(data:any){
@@ -88,6 +92,18 @@ export class ActualiteComponent implements OnInit {
       data
     });
     console.log("data envoye")
-    dialog.afterClosed();
+    dialog.afterClosed().subscribe(result => {
+      // Actualisez les données ici si nécessaire
+      this.refreshData();
+    });
+  }
+  private refreshData() {
+    // Logique d'actualisation des données (par exemple, appelez l'API pour obtenir les dernières données)
+    this.actuService.getActualite().subscribe(data => {
+      this.actualite = data;
+      this.dataSource = new MatTableDataSource(this.actualite);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 }
